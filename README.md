@@ -1,139 +1,159 @@
-# Object Tracking & Counting with YOLOv8
+# YOLOv8 Object Tracking and Counting
 
-## Watch the Video 📺
-
-[![YouTube Video](https://img.shields.io/badge/YouTube-Watch%20Video-red?logo=youtube&logoColor=white&style=for-the-badge)](https://youtu.be/YyidGtx-QmQ)
+A computer vision project for detecting, tracking, and counting people and vehicles in video footage using YOLOv8, Supervision, and OpenCV.
 
 ## Overview
-This project demonstrates real-time **Object detection, tracking, and counting** using **YOLOv8**, **Supervision**, and **OpenCV**. The goal is to track Object movement across a defined line in a video and count how many people enter and exit. This approach is useful for applications like **crowd analysis, surveillance, and retail analytics**.
 
----
+This project implements object detection, tracking, and line-crossing counting using YOLOv8. It supports people counting as well as vehicle detection and counting for cars and trucks. Bounding boxes, class labels, tracking IDs, and directional counts are displayed on the video.
 
-<img width="1845" height="811" alt="Image" src="https://github.com/user-attachments/assets/81afde11-d5bf-4a10-92fa-5d40f6313295" />
+## Features
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Video Source](#video-source)
-3. [Technologies Used](#technologies-used)
-4. [Installation](#installation)
-5. [Usage](#usage)
-6. [Features](#features)
-7. [Results](#results)
-8. [Contributing](#contributing)
-9. [License](#license)
-
----
-
-## Introduction
-Tracking and counting Object in video streams is a crucial task in computer vision. This project leverages **YOLOv8 for object detection** and the **Supervision library** for line-based counting to build a robust, real-time tracking and counting pipeline.
-
-### Objectives
-- Detect and track Object in videos using YOLOv8.
-- Count the number of Object crossing a predefined line.
-- Annotate bounding boxes and counts in real-time.
-- Provide a reusable framework for similar surveillance or analytics tasks.
-
----
-
-## Video Source
-### Input
-- The project works with any Object activity video.  
-- Example videos included in repo: `mall_counting.mp4`, `highway_car.mp4`, `highway_car2.mp4`
-
-You can replace it with your own video by updating the `VIDEO_PATH` variable in the code.
-
----
+- **Object Detection:** Detect people and vehicles using YOLOv8.
+- **Object Tracking:** Track detected objects across video frames using ByteTrack.
+- **Bounding Boxes and Labels:** Display object classes and tracking IDs.
+- **People Counting:** Count people crossing a virtual line.
+- **Vehicle Counting:** Track cars and trucks and count crossings separately.
+- **Combined Counters:** Display total vehicle entries and exits.
+- **Video Processing:** Process local video files using OpenCV.
 
 ## Technologies Used
-- **Python**: Core programming language.
-- **YOLOv8 (Ultralytics)**: Object detection.
-- **Supervision**: Line zone tracking & annotation.
-- **OpenCV**: Video processing & visualization.
-- **NumPy**: Numerical operations.
 
----
+- Python
+- YOLOv8 (Ultralytics)
+- Supervision
+- OpenCV
+- ByteTrack
+
+## Project Structure
+
+```text
+YOLOv8-Object-Tracking-and-Counting/
+├── app.py
+├── app2.py
+├── app3.py
+├── requirements.txt
+├── README.md
+├── highway_car.mp4
+├── mall_counting.mp4
+└── yolov8s.pt
+```
+
+The exact files in your repository may differ. Video files and model weights may be excluded from Git if they are too large.
+
+## Requirements
+
+- Python 3.11 recommended
+- pip
+- Git
+- A compatible operating system for OpenCV
 
 ## Installation
-### Prerequisites
-Ensure Python (>= 3.8) is installed on your system.
 
-### Steps
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/DataScientist00/Credit-Card-Fraud-Detection-Project.git
-   cd Credit-Card-Fraud-Detection-Project
-   ```
-2. Create and activate a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # On Windows: venv\Scripts\activate
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Place your input video (e.g., `mall_counting.mp4`) in the project directory if not already available.
+### 1. Clone the repository
 
----
+```bash
+git clone https://github.com/nikhil-0706/YOLOv8-Object-Tracking-and-Counting.git
+cd YOLOv8-Object-Tracking-and-Counting
+```
+
+### 2. Create a virtual environment
+
+**Windows (Command Prompt):**
+
+```bat
+py -3.11 -m venv .venv
+.venv\Scripts\activate.bat
+```
+
+**macOS/Linux:**
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+If you do not have a complete `requirements.txt`, install the main libraries with:
+
+```bash
+pip install ultralytics supervision opencv-python
+```
+
+### 4. Add the input videos and model weights
+
+Place the required video files and model weights in the project directory if they are not included in the repository.
 
 ## Usage
-Run the following command:
+
+Activate the virtual environment before running any script.
+
+### Vehicle tracking and counting
+
 ```bash
 python app.py
 ```
-or try other scripts (`app2.py`, `app3.py`) depending on your experiment.
 
-The script will:
-- Load YOLOv8 model (e.g., `yolov8s.pt` or `yolov8m.pt`).
-- Detect Object in each frame.
-- Track and count people crossing a virtual line.
-- Display real-time annotated output.
+This script is intended for tracking vehicles, displaying bounding boxes and labels, and counting line crossings.
 
-Press **ESC** to exit the video window.
+### Additional tracking experiment
 
----
+```bash
+python app2.py
+```
 
-📷 Preview of Running project
+The functionality depends on the implementation in `app2.py`.
 
-<img width="1434" height="829" alt="Image" src="https://github.com/user-attachments/assets/66edfb76-afbe-4fdd-8c08-3a7c62a55757" />---
+### People tracking and counting
 
-## Features
-- **Real-Time Detection**: Using YOLOv8 for accurate person detection.
-- **Line-Based Counting**: Entry/Exit count tracking with Supervision.
-- **Bounding Box Annotation**: Visualize detections with bounding boxes.
-- **Customizable**: Works with any video source.
-- **Lightweight & Fast**: Runs efficiently on CPU/GPU.
+```bash
+python app3.py
+```
 
----
+This script detects people, displays bounding boxes and tracking IDs, and counts crossings of a virtual line.
 
-## Results
-- **Accurate Tracking**: Object crossing the line are counted in both directions.
-- **In/Out Metrics**: Displayed directly on the video feed.
-- **Applications**:
-  - Crowd Management  
-  - Retail Store Analytics  
-  - Surveillance Systems  
+Press **ESC** to close the video window.
 
----
+## Configuration
 
-## Contributing
-We welcome contributions to improve this project! To contribute:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature-name`).
-3. Make your changes and commit (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature/your-feature-name`).
-5. Create a pull request.
+You can customize the video source by changing the `VIDEO_PATH` variable in the relevant Python script.
 
----
+For the standard YOLOv8 COCO model:
+
+- `0`: Person
+- `2`: Car
+- `7`: Truck
+
+For example, `classes=[2, 7]` filters detections to cars and trucks, while `classes=[0]` selects people.
+
+## Applications
+
+- Traffic monitoring
+- Vehicle flow analysis
+- People counting
+- Crowd monitoring
+- Retail footfall analysis
+- Video-based computer vision experiments
+
+## Limitations
+
+- Detection accuracy depends on video quality, lighting, occlusion, and model performance.
+- Tracking IDs can change when objects disappear or become occluded.
+- Line-crossing counts depend on the line placement and direction of movement.
+- CPU inference may be slower than inference on a compatible GPU.
+- Counts should be validated on the intended video before operational use.
 
 ## Acknowledgements
-- Thanks to **Ultralytics** for YOLOv8.  
-- **Supervision library** for line-based tracking.  
-- Open-source community projects that inspired this implementation.
 
----
+- [Ultralytics YOLO](https://github.com/ultralytics/ultralytics)
+- [Supervision](https://github.com/roboflow/supervision)
+- [OpenCV](https://opencv.org/)
 
-## Contact
-For questions or support, please reach out:  
-- **Email**: nikzmishra@gmail.com  
-- **YouTube**: [NeuralArc00](https://www.youtube.com/@NeuralArc00/videos)  
+## License
+
+Add a license if you intend to distribute this project publicly. Until a license is included, reuse is subject to applicable copyright law.
