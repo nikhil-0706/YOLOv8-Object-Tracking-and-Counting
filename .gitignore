@@ -3,3 +3,6 @@ myenv/
 yolov8m.pt
 yolov8s.pt
 yolov8x.pt
+.venv/
+__pycache__/
+*.pyc
